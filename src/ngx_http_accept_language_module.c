@@ -88,45 +88,46 @@ static ngx_int_t ngx_http_accept_language_variable(ngx_http_request_t *r, ngx_ht
   u_char            *start, *pos, *end;
   ngx_array_t       *langs_array = (ngx_array_t *) data;
   ngx_str_t         *langs = (ngx_str_t *) langs_array->elts;  
-    
-  start = r->headers_in.accept_language->value.data;
-  end = start + r->headers_in.accept_language->value.len;
 
-  while (start < end) {
-    // eating spaces
-    while (start < end && *start == ' ') {start++; }
+  if ( NULL != r->headers_in.accept_language ) {       
+    start = r->headers_in.accept_language->value.data;
+    end = start + r->headers_in.accept_language->value.len;
+
+    while (start < end) {
+      // eating spaces
+      while (start < end && *start == ' ') {start++; }
       
-    pos = start;
+      pos = start;
     
-    while (pos < end && *pos != ',' && *pos != ';') { pos++; }
+      while (pos < end && *pos != ',' && *pos != ';') { pos++; }
     
-    for (i = 0; i < langs_array->nelts; i++)
-    {      
-      if ((ngx_uint_t)(pos - start) >= langs[i].len && ngx_strncasecmp(start, langs[i].data, langs[i].len) == 0) {
-        found = 1;
-        break;
+      for (i = 0; i < langs_array->nelts; i++)
+      {      
+        if ((ngx_uint_t)(pos - start) >= langs[i].len && ngx_strncasecmp(start, langs[i].data, langs[i].len) == 0) {
+          found = 1;
+          break;
+        }
       }
-    }
-    if (found)
-      break;
+      if (found)
+        break;
       
-    i = 0; // If not found default to the first language from the list
+      i = 0; // If not found default to the first language from the list
     
-    // We discard the quality value
-    if (*pos == ';') {
-      while (pos < end && *pos != ',') {pos++; }
-    }
-    if (*pos == ',') {
-      pos++;
-    }
+      // We discard the quality value
+      if (*pos == ';') {
+        while (pos < end && *pos != ',') {pos++; }
+      }
+      if (*pos == ',') {
+        pos++;
+      }
       
-    start = pos;
+      start = pos;
+    }
   }
-
 
   v->data = langs[i].data;
   v->len  = langs[i].len;
-  
+
   /* Set all required params */
   v->valid = 1;
   v->no_cacheable = 0;
