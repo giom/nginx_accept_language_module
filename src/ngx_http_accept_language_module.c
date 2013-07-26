@@ -8,7 +8,7 @@ static ngx_int_t ngx_http_accept_language_variable(ngx_http_request_t *r, ngx_ht
 static ngx_command_t  ngx_http_accept_language_commands[] = {
 
     { ngx_string("set_from_accept_language"),
-      NGX_HTTP_SRV_CONF|NGX_HTTP_LOC_CONF|NGX_CONF_1MORE,
+      NGX_HTTP_MAIN_CONF|NGX_HTTP_SRV_CONF|NGX_HTTP_LOC_CONF|NGX_CONF_1MORE,
       ngx_http_accept_language,
       NGX_HTTP_MAIN_CONF_OFFSET,
       0,
