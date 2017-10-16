@@ -1,4 +1,4 @@
-h1. Nginx Accept Language module for dynimic module and static module
+h1. Nginx Accept Language module for dynimic or static module
 
 This module did a test with nginx v1.13.6 mainline.
 
