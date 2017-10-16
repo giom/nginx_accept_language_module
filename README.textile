@@ -1,4 +1,6 @@
-h1. Nginx Accept Language module
+h1. Nginx Accept Language module for dynimic module and static module
+
+This module did a test with nginx v1.13.6 mainline.
 
 This module parses the Accept-Language header and gives the most suitable locale for the user from a list of supported locales from your website.
 
