@@ -42,6 +42,7 @@ cd nginx-${NGINX_VERSION}
   --with-http_v2_module \
   --with-http_auth_request_module \
   --with-http_geoip_module \
+  # for dynimic module
   --with-compat \
   --add-dynamic-module=/tmp/nginx_accept_language_module-master
 make -j$(getconf _NPROCESSORS_ONLN)
