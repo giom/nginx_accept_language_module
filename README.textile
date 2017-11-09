@@ -2,6 +2,53 @@ h1. Nginx Accept Language module
 
 This module parses the Accept-Language header and gives the most suitable locale for the user from a list of supported locales from your website.
 
+THIS MODULE IS FOR DYNIMIC MODULE NOT STATIC MODULE ! 
+
+IF YOU WANT A STATIC MODULE, USE https://github.com/giom/nginx_accept_language_module
+
+h3. Install
+
+``` sh
+cd /tmp
+wget https://github.com/hgati/nginx_accept_language_module/archive/master.zip
+unzip master.zip
+rm -f master.zip
+```
+
+``` sh
+NGINX_VERSION=1.13.6
+cd /tmp
+wget http://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz
+tar xvzf /tmp/nginx-${NGINX_VERSION}.tar.gz
+cd nginx-${NGINX_VERSION}
+
+./configure \
+  --prefix=/etc/nginx \
+  --sbin-path=/usr/sbin/nginx \
+  --modules-path=/usr/lib/nginx/modules \
+  --conf-path=/etc/nginx/nginx.conf \
+  --pid-path=/var/run/nginx.pid \
+  --lock-path=/var/run/nginx.lock \
+  --http-log-path=/var/log/nginx/access.log \
+  --error-log-path=/var/log/nginx/error.log \
+  --with-pcre-jit \
+  --with-http_ssl_module \
+  --with-http_realip_module \
+  --with-stream_ssl_module \
+  --with-stream_realip_module \
+  --with-http_stub_status_module \
+  --with-http_gzip_static_module \
+  --with-http_v2_module \
+  --with-http_auth_request_module \
+  --with-http_geoip_module \
+  --with-compat \
+  --add-dynamic-module=/tmp/nginx_accept_language_module-master
+
+make -j$(getconf _NPROCESSORS_ONLN)
+make install
+ln -s /usr/lib/nginx/modules /etc/nginx/modules
+```
+
 h3. Syntax
 
   set_from_accept_language $lang en ja pl;
