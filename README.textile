@@ -2,12 +2,13 @@ h1. Nginx Accept Language module
 
 This module parses the Accept-Language header and gives the most suitable locale for the user from a list of supported locales from your website.
 
-THIS MODULE IS <font color="red"><b>FOR DYNIMIC MODULE</b></font> NOT STATIC MODULE ! 
+THIS MODULE IS <b>FOR DYNIMIC MODULE</b> NOT STATIC MODULE ! 
 
 IF YOU WANT A STATIC MODULE, USE https://github.com/giom/nginx_accept_language_module
 
 h3. Install
 
+extract module's source.
 <pre>
 $ cd /tmp
 $ wget https://github.com/hgati/nginx_accept_language_module/archive/master.zip
@@ -15,6 +16,7 @@ $ unzip master.zip
 $ rm -f master.zip
 </pre>
 
+nginx compile with module's source the above.
 <pre>
 $ NGINX_VERSION=1.13.6
 $ cd /tmp
@@ -45,6 +47,46 @@ $ ./configure \
 $ make -j$(getconf _NPROCESSORS_ONLN)
 $ make install
 $ ln -s /usr/lib/nginx/modules /etc/nginx/modules
+</pre>
+
+nginx.conf
+<pre>
+load_module "modules/ngx_http_accept_language_module.so";
+
+http {
+
+  ##
+  # Nomalize to a variable $lang from webbrowser's Accept_Language header
+  ##
+  map $http_accept_language $lang {
+    default en;
+    ~ko ko; ~ru ru; ~ar ar; ~bg bg; ~ca ca; ~cs cs; ~da da; ~de de;
+    ~el el; ~es es; ~fi fi; ~fy fy; ~fr fr; ~gl gl; ~hu hu; ~id id; ~it it; ~ja ja;
+    ~nb nb; ~nl nl; ~pl pl; ~pt-br pt-br; ~pt-pt pt-pt; ~ro ro; ~sv sv; ~tr tr; ~uk uk;
+    ~zh-hans zh-hans; ~zh-hant zh-hant; ~zh-cn zh-cn;
+  }
+
+}
+</pre>
+
+virtualhost.conf
+<pre>
+server {
+
+  listen   80;
+  server_name www.example.com;
+
+  root /etc/nginx/html;
+
+  if ($lang ~ (?i)ja) { 
+    return 404;
+  }
+  
+  if ($lang ~ ^$) {
+    return 404;
+  }
+  
+}
 </pre>
 
 h3. Syntax
