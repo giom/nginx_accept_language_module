@@ -2,7 +2,7 @@ h1. Nginx Accept Language module
 
 This module parses the Accept-Language header and gives the most suitable locale for the user from a list of supported locales from your website.
 
-THIS MODULE IS <b>FOR DYNIMIC MODULE</b> NOT STATIC MODULE ! 
+THIS MODULE IS <font color="red"><b>FOR DYNIMIC MODULE</b></font> NOT STATIC MODULE ! 
 
 IF YOU WANT A STATIC MODULE, USE https://github.com/giom/nginx_accept_language_module
 
