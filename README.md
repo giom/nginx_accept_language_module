@@ -85,3 +85,7 @@ server {
   
 }
 ```
+
+### Usage
+
+https://github.com/giom/nginx_accept_language_module
