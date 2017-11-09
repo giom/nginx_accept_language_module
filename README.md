@@ -76,11 +76,11 @@ server {
   root /etc/nginx/html;
   
   if ($lang ~ (?i)ja) { 
-    return 404;
+    return 302 http://www.lelong.com.my;
   }
   
   if ($lang ~ ^$) {
-    return 404;
+    return 302 http://www.lelong.com.my;
   }
   
 }
