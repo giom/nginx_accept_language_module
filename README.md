@@ -1,4 +1,4 @@
-h1. Nginx Accept Language module
+# Nginx Accept Language module
 
 This module parses the Accept-Language header and gives the most suitable locale for the user from a list of supported locales from your website.
 
@@ -6,7 +6,7 @@ THIS MODULE IS <b>FOR DYNIMIC MODULE</b> NOT STATIC MODULE !
 
 IF YOU WANT A STATIC MODULE, USE https://github.com/giom/nginx_accept_language_module
 
-h3. Install
+### Install
 
 extract module's source.
 ```sh
@@ -18,12 +18,12 @@ rm -f master.zip
 
 nginx compile with module's source the above.
 ```sh
-$ NGINX_VERSION=1.13.6
-$ cd /tmp
-$ wget http://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz
-$ tar xvzf /tmp/nginx-${NGINX_VERSION}.tar.gz
-$ cd nginx-${NGINX_VERSION}
-$ ./configure \
+NGINX_VERSION=1.13.6
+cd /tmp
+wget http://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz
+tar xvzf /tmp/nginx-${NGINX_VERSION}.tar.gz
+cd nginx-${NGINX_VERSION}
+./configure \
   --prefix=/etc/nginx \
   --sbin-path=/usr/sbin/nginx \
   --modules-path=/usr/lib/nginx/modules \
@@ -44,9 +44,9 @@ $ ./configure \
   --with-http_geoip_module \
   --with-compat \
   --add-dynamic-module=/tmp/nginx_accept_language_module-master
-$ make -j$(getconf _NPROCESSORS_ONLN)
-$ make install
-$ ln -s /usr/lib/nginx/modules /etc/nginx/modules
+make -j$(getconf _NPROCESSORS_ONLN)
+make install
+ln -s /usr/lib/nginx/modules /etc/nginx/modules
 ```
 
 nginx.conf
