@@ -8,14 +8,14 @@ IF YOU WANT A STATIC MODULE, USE https://github.com/giom/nginx_accept_language_m
 
 h3. Install
 
-``` sh
+```sh
 cd /tmp
 wget https://github.com/hgati/nginx_accept_language_module/archive/master.zip
 unzip master.zip
 rm -f master.zip
 ```
 
-``` sh
+```sh
 NGINX_VERSION=1.13.6
 cd /tmp
 wget http://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz
