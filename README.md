@@ -9,15 +9,15 @@ IF YOU WANT A STATIC MODULE, USE https://github.com/giom/nginx_accept_language_m
 h3. Install
 
 extract module's source.
-<pre>
-$ cd /tmp
-$ wget https://github.com/hgati/nginx_accept_language_module/archive/master.zip
-$ unzip master.zip
-$ rm -f master.zip
-</pre>
+```sh
+cd /tmp
+wget https://github.com/hgati/nginx_accept_language_module/archive/master.zip
+unzip master.zip
+rm -f master.zip
+```
 
 nginx compile with module's source the above.
-<pre>
+```sh
 $ NGINX_VERSION=1.13.6
 $ cd /tmp
 $ wget http://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz
@@ -47,10 +47,10 @@ $ ./configure \
 $ make -j$(getconf _NPROCESSORS_ONLN)
 $ make install
 $ ln -s /usr/lib/nginx/modules /etc/nginx/modules
-</pre>
+```
 
 nginx.conf
-<pre>
+```sh
 load_module "modules/ngx_http_accept_language_module.so";
 
 http {
@@ -64,10 +64,10 @@ http {
   }
   
 }
-</pre>
+```
 
 virtualhost.conf
-<pre>
+```sh
 server {
   
   listen   80;
@@ -84,54 +84,4 @@ server {
   }
   
 }
-</pre>
-
-h3. Syntax
-
-  set_from_accept_language $lang en ja pl;
- -  `$lang` is the variable in which to store the locale
- -  `en ja pl` are the locales supported by your website
-  
-If none of the locales from accept_language is available on your website, it sets the variable to the first locale of your website's supported locales (in this case en)
-  
-h4. Caveat
-
-It currently assumes that the accept-language is sorted by quality values (from my tests it's the case for safari, firefox, opera and ie) and discards q (see http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html). In the situation where I'm using the module, this assumption works... but buyer beware :-)
-
-h3. Example configuration
-
-If you have different subdomains for each languages
-<code>
-server {
-    listen 80;
-    server_name your_domain.com;
-    set_from_accept_language $lang en ja zh;
-    rewrite ^/(.*) http://$lang.your_domain.com redirect;
-}
-</code>
-
-Or you could do something like this, redirecting people coming to '/' to /en (or /pt)
-
-<code>
-location / {
-    set_from_accept_language $lang pt en;
-     if ( $request_uri ~ ^/$ ) {
-       rewrite ^/$ /$lang redirect;
-       break;
-     }
-}
-</code>
-
-
-h3. Why did I create it? 
-
-I'm using page caching with merb on a multi-lingual website and I needed a way to serve the correct language page from the cache
-I'll soon put an example on http://gom-jabbar.org
-
-h3. Bugs
-
-Send Bugs to Guillaume Maury (dev@gom-jabbar.org)
-
-h3. Acknowledgement
-
-Thanks to Evan Miller for his guide on writing nginx modules (http://emiller.info/nginx-modules-guide.html)
+```
