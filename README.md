@@ -16,7 +16,7 @@ unzip master.zip
 rm -f master.zip
 ```
 
-nginx compile with module's source the above.
+nginx compile with module's source
 ```sh
 NGINX_VERSION=1.13.6
 cd /tmp
