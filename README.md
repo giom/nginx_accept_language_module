@@ -56,13 +56,7 @@ load_module "modules/ngx_http_accept_language_module.so";
 
 http {
   
-  map $http_accept_language $lang {
-    default en;
-    ~ko ko; ~ru ru; ~ar ar; ~bg bg; ~ca ca; ~cs cs; ~da da; ~de de;
-    ~el el; ~es es; ~fi fi; ~fy fy; ~fr fr; ~gl gl; ~hu hu; ~id id; ~it it; ~ja ja;
-    ~nb nb; ~nl nl; ~pl pl; ~pt-br pt-br; ~pt-pt pt-pt; ~ro ro; ~sv sv; ~tr tr; ~uk uk;
-    ~zh-hans zh-hans; ~zh-hant zh-hant; ~zh-cn zh-cn;
-  }
+  set_from_accept_language $lang en ko ru ar bg ca cs da de el es fi fy fr gl hu id it ja nb nl pl pt-br pt-pt ro sv tr uk zh-hans zh-hant zh-cn;
   
 }
 ```
